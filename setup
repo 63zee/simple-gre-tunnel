@@ -19,5 +19,4 @@ sudo ip addr add [Tunnel_IP_voor_Hoofdserver/30] dev gre0
 sudo ip route add [subnet_IP] via [DDoS_server_IP] dev gre0
 
 
-# Door gebruik te maken van deze commands stem je ermee in dat ik niet verantwoordelijk ben voor schade of andere dingen door gebruik te maken van dit script. Alles is op eigen verantwoordelijkheid & risico.
 
