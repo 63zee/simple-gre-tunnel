@@ -1,0 +1,23 @@
+#Op de DDoS-beschermingserver:
+#------------------------------
+# GRE tunnel maken
+sudo ip tunnel add gre0 mode gre remote [Hoofdserver_IP] local [DDoS_server_IP] ttl 255
+sudo ip link set gre0 up
+sudo ip addr add [Tunnel_IP_voor_DDoS_server/30] dev gre0
+
+# route (statische) toevoegen voor het subnet dat via de GRE tunnel moet worden gestuurd
+sudo ip route add [subnet_IP] via [Hoofdserver_IP] dev gre0
+
+# Op de mainserver / hoofdserver:
+#---------------------------------
+# GRE tunnel maken
+sudo ip tunnel add gre0 mode gre remote [DDoS_server_IP] local [Hoofdserver_IP] ttl 255
+sudo ip link set gre0 up
+sudo ip addr add [Tunnel_IP_voor_Hoofdserver/30] dev gre0
+
+# Statische route toevoegen voor het subnet dat via de GRE-tunnel moet worden gestuurd
+sudo ip route add [subnet_IP] via [DDoS_server_IP] dev gre0
+
+
+# Door gebruik te maken van deze commands stem je ermee in dat ik niet verantwoordelijk ben voor schade of andere dingen door gebruik te maken van dit script. Alles is op eigen verantwoordelijkheid & risico.
+
